@@ -1,0 +1,55 @@
+[
+  {
+    "title": "TerraDS: A Dataset for Terraform HCL Programs",
+    "tags": ["Conference", "MSR", "Dataset"],
+    "url": "https://doi.org/10.1109/msr66628.2025.00101",
+    "authors": [
+      {
+        "name": "Christoph Bühler"
+      },
+      {
+        "name": "David Spielmann"
+      },
+      {
+        "name": "Roland Meier"
+      },
+      {
+        "name": "Guido Salvaneschi"
+      }
+    ],
+    "abstract": "Infrastructure as Code (IaC) aims to automate infrastructure management by enabling the definition of infrastructure configurations in programs, rather than manually configuring hardware or cloud resources. Terraform is one of the most widely used IaC tools, gaining significant traction in recent years, as highlighted by its large and active user community and widespread adoption in both open-source and enterprise environments. Terraform’s code is written in the HashiCorp Configuration Language (HCL), which defines the infrastructure in a declarative manner. Despite the widespread adoption of Terraform, there is no large-scale dataset available for researchers to study IaC Terraform programs systematically. To address this gap, we present TerraDS, the first dataset of publicly available Terraform programs written in HCL. TerraDS contains the HCL code and the metadata of 67,360 open source repositories with permissive open-source licenses. The dataset includes 279,344 Terraform modules with 1,773,991 registered resources, all compiled into a reusable archive (~335 MB)."
+  },
+  {
+    "title": "Master Thesis: Enhancing Early Verification and Testing for Infrastructure as Code",
+    "tags": ["Master Thesis", "IaC", "Testing"],
+    "authors": [
+      {
+        "name": "Christoph Bühler"
+      },
+      {
+        "name": "Pascal Weisenburger",
+        "role": "Co-Supervisor"
+      },
+      {
+        "name": "Guido Salvaneschi",
+        "role": "Supervisor"
+      }
+    ],
+    "abstract": "As misconfigurations in Infrastructure as Code (IaC) programs can lead to costly and time-consuming errors during deployment, there is a critical need for efficient pre-deployment verification techniques. This thesis explores automated verification methods to provide developers with immediate feedback on the correctness of cloud system configurations before deployment. The focus is on creating a proof-of-concept tool that models and verifies properties such as network reachability within cloud infrastructures defined by IaC programs. This approach eliminates the need for resource-intensive and slow trial-and-error deployments, enabling fast bug detection and reducing the risk of system outages, ultimately fostering more reliable and secure cloud operations. The outcomes aim to establish a foundation for broader research in pre-deployment verification for declarative IaC solutions."
+  },
+  {
+    "title": "Master Thesis: Trust in a Distributed Authentication Mesh",
+    "tags": ["Master Thesis", "Authentication", "Security"],
+    "url": "https://buehler.github.io/mse-master-thesis/report.pdf",
+    "authors": [
+      {
+        "name": "Christoph Bühler"
+      },
+      {
+        "name": "Mirko Stocker",
+        "role": "Supervisor"
+      }
+    ],
+    "abstract": "The \"Distributed Authentication Mesh\" is a concept to authenticate and authorize an identity over multiple services that do not share an authentication scheme. The mesh uses a common identity to encode the authorization information into a JSON Web Token (JWT) that is signed by a certificate of the system. The JWT is then used to authenticate the user at the participating services. However, the current concept and implementation of the mesh does not allow the trusted, secure communication between distant trust zones. This thesis analyzes the current state of the mesh and provides a solution to spread the \"Distributed Authentication Mesh\" over multiple trust zones and environments. The project analyzes several possibilities to form a trust contract between trust zones of the mesh. After the analysis, a contract is designed and implemented. The contract is then used to distribute the mesh over multiple trust zones and allow secure communication between the zones. The thesis also provides a working demo setup of the mesh that can be used to validate the concept. The conclusions of the thesis provide a detailed summary of the project and possible extensions to the mesh in follow-up work."
+  }
+]
