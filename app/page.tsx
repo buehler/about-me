@@ -1,12 +1,28 @@
 import { ExternalLink } from '@/components/ext-link';
-import { Publications } from '@/components/publications';
+import { ResearchInterest } from '@/components/research-interest';
 import { SocialLink } from '@/components/social-link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Cloud, Code, Mail, MapPin, Shield } from 'lucide-react';
+import { executeQuery } from '@/lib/datocms/executeQuery';
+import { graphql } from '@/lib/datocms/graphql';
+import { Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function AboutMe() {
+const query = graphql(`
+  {
+    allInterests(orderBy: [order_ASC]) {
+      id
+      title
+      description
+      icon {
+        url
+      }
+    }
+  }
+`);
+
+export default async function AboutMe() {
+  const { allInterests } = await executeQuery(query);
+
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="bg-white shadow-sm">
@@ -58,7 +74,7 @@ export default function AboutMe() {
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-12">
         <section>
           <h2 className="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
-          <div className="prose prose-lg max-w-none text-gray-700">
+          <div className="space-y-2 max-w-none text-gray-700 ">
             <p>
               I am a research assistant with the Programming group at the University of St. Gallen. I am working on recent
               topics in the context of Software Engineering. Currently, my goal is to improve the current state of
@@ -87,57 +103,20 @@ export default function AboutMe() {
             </p>
           </div>
         </section>
-        <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Research Interests</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Code className="w-5 h-5" />
-                  Software Engineering and Programming Languages
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  General understanding of software engineering principles, programming languages, and their impact on
-                  software. Improving the life of engineers through better tools and practices.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-5 h-5" />
-                  Software and System Security
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Security in the context of the AI age. This includes research around usage of AI software and its
-                  implications on software security, as well as the development of secure systems in an AI-driven world.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Cloud className="w-5 h-5" />
-                  Infrastructure as Code (IaC)
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Improve the current state of the art in Infrastructure as Code by exploring new tools, practices, and
-                  methodologies that enhance the development, deployment, and management of cloud infrastructure.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-        <section>
+        {allInterests.length && (
+          <section>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Research Interests</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {allInterests.map((i) => (
+                <ResearchInterest key={i.id} title={i.title} description={i.description} iconUrl={i.icon.url} />
+              ))}
+            </div>
+          </section>
+        )}
+        {/* <section>
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Publications</h2>
           <Publications />
-        </section>
+        </section> */}
       </div>
     </main>
   );

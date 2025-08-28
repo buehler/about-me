@@ -4,21 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "generate-schema": "dotenv -c -- bash -c 'gql.tada generate schema https://graphql.datocms.com --header \"X-Exclude-Invalid: true\" --header \"Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN\"'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@datocms/cda-client": "^0.2.7",
     "@radix-ui/react-collapsible": "^1.1.11",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "gql.tada": "^1.8.13",
     "linq": "^4.0.3",
     "lucide-react": "^0.537.0",
     "next": "15.4.6",
     "react": "19.1.0",
+    "react-datocms": "^7.2.2",
     "react-dom": "19.1.0",
+    "serialize-error": "^12.0.0",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
@@ -26,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^10.0.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
