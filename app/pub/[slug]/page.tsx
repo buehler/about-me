@@ -62,8 +62,8 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             <div className="text-center md:text-left">
               <div className="text-gray-500">{publication.publicationDate}</div>
-              <h1 className="text-4xl font-bold text-gray-900">{publication.title}</h1>
-              {!!publication.venueTitle && <p className=" text-gray-500 mb-4">{publication.venueTitle}</p>}
+              <h1 className="text-2xl md:text-4xl text-left mb-4 font-bold text-gray-900">{publication.title}</h1>
+              {!!publication.venueTitle && <p className="text-left text-gray-500 mb-4">{publication.venueTitle}</p>}
             </div>
           </div>
           <div>
@@ -84,14 +84,11 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
           </TabsList>
 
           <TabsContent value="abstract" className="max-w-4xl mx-auto">
-            <p className="text-gray-900 text-justify">{publication.abstract}</p>
+            <p className="text-gray-900 text-justify px-4">{publication.abstract}</p>
           </TabsContent>
-          <TabsContent value="paper" className="w-6xl mx-auto">
+          <TabsContent value="paper" className="w-full mx-4 md:w-6xl md:mx-auto">
             <object data={publication.file.url} type="application/pdf" width="100%" height="100%">
-              <p>
-                Your browser does not support PDFs.
-                <a href={publication.file.url}>Download the PDF</a>.
-              </p>
+              <embed src={publication.file.url} width="100%" height="100%" />
             </object>
           </TabsContent>
         </Tabs>

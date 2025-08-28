@@ -35,7 +35,7 @@ export default async function AboutMe() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <section className="bg-white shadow-sm">
+      <header className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             <div className="flex-shrink-0">
@@ -70,7 +70,7 @@ export default async function AboutMe() {
                   <span>St. Gallen, Switzerland</span>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 items-center md:items-start text-gray-500">
+              <div className="flex flex-row gap-4 items-center md:justify-start justify-center text-gray-500">
                 <SocialLink href="https://github.com/buehler" type="github" />
                 <SocialLink href="https://www.linkedin.com/in/christoph-b%C3%BChler-a3a262270/" type="linkedin" />
                 <SocialLink href="https://bsky.app/profile/me.cbue.ch" type="bluesky" />
@@ -80,7 +80,7 @@ export default async function AboutMe() {
             </div>
           </div>
         </div>
-      </section>
+      </header>
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-12">
         <section>
           <h2 className="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
