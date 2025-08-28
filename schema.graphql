@@ -75,6 +75,41 @@ input CreatedAtFilter {
 
 scalar CustomData
 
+"""A ISO 8601 compliant date value"""
+scalar Date
+
+"""Specifies how to filter Date fields"""
+input DateFilter {
+  """
+  Filter records with a value that's strictly greater than the one specified
+  """
+  gt: Date
+
+  """Filter records with a value that's less than the one specified"""
+  lt: Date
+
+  """
+  Filter records with a value that's greater than or equal to the one specified
+  """
+  gte: Date
+
+  """
+  Filter records with a value that's less or equal than the one specified
+  """
+  lte: Date
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """Search for records with an exact match"""
+  eq: Date
+
+  """Exclude records with an exact match"""
+  neq: Date
+}
+
 """A ISO 8601 compliant datetime value"""
 scalar DateTime
 
@@ -2451,6 +2486,15 @@ input PublicationModelFilter {
   _status: StatusFilter
   _updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  abstract: TextFilter
+  authors: StringFilter
+  file: FileFilter
+  publicationDate: DateFilter
+  slug: SlugFilter
+  tags: StringFilter
+  title: StringFilter
+  url: StringFilter
+  venueTitle: StringFilter
   OR: [PublicationModelFilter]
   AND: [PublicationModelFilter]
 }
@@ -2474,6 +2518,18 @@ enum PublicationModelOrderBy {
   _updatedAt_DESC
   _isValid_ASC
   _isValid_DESC
+  authors_ASC
+  authors_DESC
+  publicationDate_ASC
+  publicationDate_DESC
+  tags_ASC
+  tags_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
+  venueTitle_ASC
+  venueTitle_DESC
 }
 
 """Record of type 📄 Publication (publication)"""
@@ -2496,7 +2552,19 @@ type PublicationRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  abstract(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  authors: String!
+  file: FileField!
   id: ItemId!
+  publicationDate: Date!
+  slug: String!
+  tags: String
+  title: String!
+  url: String
+  venueTitle: String
 }
 
 """Specifies how to filter by publication datetime"""
@@ -2755,6 +2823,21 @@ type Site {
 
 enum SiteLocale {
   en
+}
+
+"""Specifies how to filter Slug fields"""
+input SlugFilter {
+  """Search for records with an exact match"""
+  eq: String
+
+  """Exclude records with an exact match"""
+  neq: String
+
+  """Filter records that have one of the specified slugs"""
+  in: [String]
+
+  """Filter records that do have one of the specified slugs"""
+  notIn: [String]
 }
 
 """Specifies how to filter by status"""

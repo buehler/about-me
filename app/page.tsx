@@ -1,4 +1,5 @@
 import { ExternalLink } from '@/components/ext-link';
+import { Publication } from '@/components/publication';
 import { ResearchInterest } from '@/components/research-interest';
 import { SocialLink } from '@/components/social-link';
 import { executeQuery } from '@/lib/datocms/executeQuery';
@@ -17,11 +18,20 @@ const query = graphql(`
         url
       }
     }
+    allPublications(orderBy: [publicationDate_DESC]) {
+      id
+      slug
+      title
+      venueTitle
+      publicationDate
+      authors
+      tags
+    }
   }
 `);
 
 export default async function AboutMe() {
-  const { allInterests } = await executeQuery(query);
+  const { allInterests, allPublications } = await executeQuery(query);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -103,7 +113,7 @@ export default async function AboutMe() {
             </p>
           </div>
         </section>
-        {allInterests.length && (
+        {!!allInterests.length && (
           <section>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Research Interests</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -113,10 +123,16 @@ export default async function AboutMe() {
             </div>
           </section>
         )}
-        {/* <section>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Publications</h2>
-          <Publications />
-        </section> */}
+        {!!allPublications.length && (
+          <section>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Publications</h2>
+            <div className="space-y-6">
+              {allPublications.map((i) => (
+                <Publication key={i.id} data={i} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
