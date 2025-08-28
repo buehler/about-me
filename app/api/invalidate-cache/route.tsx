@@ -1,7 +1,7 @@
 import { cacheTag } from '@/lib/datocms/executeQuery';
 import { revalidateTag } from 'next/cache';
 import type { NextRequest, NextResponse } from 'next/server';
-import { invalidRequestResponse, successfulResponse } from '../utils';
+import { handleUnexpectedError, invalidRequestResponse, successfulResponse } from '../utils';
 
 /*
  * This route handler receives "Cache Tag Invalidation" events from a DatoCMS
