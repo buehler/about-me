@@ -94,7 +94,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
           <TabsContent value="abstract" className="max-w-4xl mx-auto">
             <p className="text-gray-900 text-justify px-4">{publication.abstract}</p>
           </TabsContent>
-          <TabsContent value="paper" className="w-full mx-4 md:w-6xl md:mx-auto">
+          <TabsContent value="paper" className="w-full px-4 md:w-6xl md:mx-auto">
             <object data={publication.file.url} type="application/pdf" className="w-full h-full">
               <div className="text-center mx-auto">
                 <p>Sorry, your browser does not support rendering a PDF file. But not to worry...</p>
