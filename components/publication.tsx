@@ -36,17 +36,7 @@ export const Publication = ({ data }: Props) => (
                   </Badge>
                 ))}
             </div>
-            <p className="text-gray-600 mb-2">
-              {data.authors
-                .split(',')
-                .map((a) => a.trim())
-                .map((a, i) => (
-                  <span key={i}>
-                    {a}
-                    {i < data.authors.split(',').length - 1 ? ', ' : ''}
-                  </span>
-                ))}
-            </p>
+            <p className="text-gray-600 mb-2">{data.authors}</p>
           </div>
         </div>
       </CardContent>

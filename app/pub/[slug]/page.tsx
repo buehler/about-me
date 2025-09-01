@@ -74,14 +74,7 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
               {!!publication.venueTitle && <p className="text-left text-gray-500 mb-4">{publication.venueTitle}</p>}
             </div>
           </div>
-          <div>
-            {authors.map((a, i) => (
-              <span key={i}>
-                {a}
-                {i < authors.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </div>
+          <div>{authors}</div>
         </div>
       </header>
       <section className="py-4 grow flex">
