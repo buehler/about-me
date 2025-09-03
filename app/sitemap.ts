@@ -5,6 +5,9 @@ import type { MetadataRoute } from 'next';
 
 const query = graphql(`
   {
+    aboutMe {
+      _publishedAt
+    }
     allPublications {
       slug
       _publishedAt
@@ -13,13 +16,13 @@ const query = graphql(`
 `);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const { allPublications } = await executeQuery(query);
+  const { aboutMe, allPublications } = await executeQuery(query);
   return [
     {
       url: getServerSideURL(),
       priority: 1,
       changeFrequency: 'monthly',
-      lastModified: new Date(),
+      lastModified: aboutMe?._publishedAt ?? new Date(),
     },
     ...allPublications.map(
       (pub) =>

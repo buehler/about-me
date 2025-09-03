@@ -120,3 +120,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.mpt a {
+  @apply underline;
+  @apply decoration-amber-300;
+}

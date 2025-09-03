@@ -1,3 +1,240 @@
+"""Record of type 👨‍🔧 About Me (about_me)"""
+type AboutMeRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  about(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  email: String!
+  id: ItemId!
+  location: String
+  profilePicture: AltTitleFileField!
+  title: String!
+  workTitle(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  workplace(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+}
+
+type AltFileField implements FileFieldInterface {
+  _createdAt: DateTime!
+
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
+  _editingUrl: String
+  _updatedAt: DateTime!
+  alt(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String!
+  author: String
+  basename: String!
+  blurUpThumb(
+    """
+    Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
+    """
+    punch: Float! = 1
+
+    """Maximum image dimension (defaults to 24px)"""
+    size: Int! = 24
+
+    """Image quality (defaults to 70%)"""
+    quality: Int! = 70
+
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String
+  blurhash: String
+  colors: [ColorField!]!
+  copyright: String
+  customData(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): CustomData!
+  exifInfo: CustomData!
+  filename: String!
+  focalPoint(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): focalPoint
+  format: String!
+  height: IntType
+  id: UploadId!
+  md5: String!
+  mimeType: String!
+  notes: String
+  responsiveImage(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+
+    """Specify a custom `sizes` attribute for the image"""
+    sizes: String
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): ResponsiveImage
+  size: IntType!
+  smartTags: [String!]!
+  tags: [String!]!
+  thumbhash: String
+  title(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String
+  url(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String!
+  video: UploadVideoField
+  width: IntType
+}
+
+type AltTitleFileField implements FileFieldInterface {
+  _createdAt: DateTime!
+
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
+  _editingUrl: String
+  _updatedAt: DateTime!
+  alt(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String!
+  author: String
+  basename: String!
+  blurUpThumb(
+    """
+    Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
+    """
+    punch: Float! = 1
+
+    """Maximum image dimension (defaults to 24px)"""
+    size: Int! = 24
+
+    """Image quality (defaults to 70%)"""
+    quality: Int! = 70
+
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String
+  blurhash: String
+  colors: [ColorField!]!
+  copyright: String
+  customData(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): CustomData!
+  exifInfo: CustomData!
+  filename: String!
+  focalPoint(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): focalPoint
+  format: String!
+  height: IntType
+  id: UploadId!
+  md5: String!
+  mimeType: String!
+  notes: String
+  responsiveImage(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+
+    """Specify a custom `sizes` attribute for the image"""
+    sizes: String
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): ResponsiveImage
+  size: IntType!
+  smartTags: [String!]!
+  tags: [String!]!
+  thumbhash: String
+  title(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String!
+  url(
+    """Imgix transformations to apply to the image"""
+    imgixParams: ImgixParams
+  ): String!
+  video: UploadVideoField
+  width: IntType
+}
+
 """Specifies how to filter Boolean fields"""
 input BooleanFilter {
   """Search for records with an exact match"""
@@ -2476,6 +2713,64 @@ input OrientationFilter {
   neq: UploadOrientation
 }
 
+input ProfessionalActivityModelFilter {
+  _createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  OR: [ProfessionalActivityModelFilter]
+  AND: [ProfessionalActivityModelFilter]
+}
+
+enum ProfessionalActivityModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+}
+
+"""Record of type ✍️ Professional Activity (professional_activity)"""
+type ProfessionalActivityRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+}
+
 input PublicationModelFilter {
   _createdAt: CreatedAtFilter
   id: ItemIdFilter
@@ -2615,10 +2910,24 @@ type Query {
   ): CollectionMetadata!
 
   """Returns meta information regarding a record collection"""
+  _allProfessionalActivitiesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: ProfessionalActivityModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
   _allPublicationsMeta(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
     filter: PublicationModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
+  _allSocialLinksMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: SocialLinkModelFilter
   ): CollectionMetadata!
 
   """Returns meta information regarding an assets collection"""
@@ -2638,6 +2947,17 @@ type Query {
     """
     fallbackLocales: [SiteLocale!]
   ): Site!
+
+  """Returns the single instance record"""
+  aboutMe(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): AboutMeRecord
 
   """Returns a collection of records"""
   allInterests(
@@ -2659,6 +2979,25 @@ type Query {
   ): [InterestRecord!]!
 
   """Returns a collection of records"""
+  allProfessionalActivities(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: ProfessionalActivityModelFilter
+    orderBy: [ProfessionalActivityModelOrderBy] = [_updatedAt_DESC]
+  ): [ProfessionalActivityRecord!]!
+
+  """Returns a collection of records"""
   allPublications(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2676,6 +3015,25 @@ type Query {
     filter: PublicationModelFilter
     orderBy: [PublicationModelOrderBy] = [_updatedAt_DESC]
   ): [PublicationRecord!]!
+
+  """Returns a collection of records"""
+  allSocialLinks(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: SocialLinkModelFilter
+    orderBy: [SocialLinkModelOrderBy] = [_updatedAt_DESC]
+  ): [SocialLinkRecord!]!
 
   """Returns a collection of assets"""
   allUploads(
@@ -2710,6 +3068,19 @@ type Query {
   ): InterestRecord
 
   """Returns a specific record"""
+  professionalActivity(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ProfessionalActivityModelFilter
+    orderBy: [ProfessionalActivityModelOrderBy] = [_updatedAt_DESC]
+  ): ProfessionalActivityRecord
+
+  """Returns a specific record"""
   publication(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2721,6 +3092,19 @@ type Query {
     filter: PublicationModelFilter
     orderBy: [PublicationModelOrderBy] = [_updatedAt_DESC]
   ): PublicationRecord
+
+  """Returns a specific record"""
+  socialLink(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: SocialLinkModelFilter
+    orderBy: [SocialLinkModelOrderBy] = [_updatedAt_DESC]
+  ): SocialLinkRecord
 
   """Returns a specific asset"""
   upload(
@@ -2838,6 +3222,70 @@ input SlugFilter {
 
   """Filter records that do have one of the specified slugs"""
   notIn: [String]
+}
+
+input SocialLinkModelFilter {
+  _createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  icon: FileFilter
+  link: StringFilter
+  OR: [SocialLinkModelFilter]
+  AND: [SocialLinkModelFilter]
+}
+
+enum SocialLinkModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  link_ASC
+  link_DESC
+}
+
+"""Record of type 🔗 Social Link (social_link)"""
+type SocialLinkRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  icon: AltFileField!
+  id: ItemId!
+  link: String!
 }
 
 """Specifies how to filter by status"""
