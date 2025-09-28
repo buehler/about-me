@@ -73,6 +73,10 @@ export default async function AboutMe() {
               <SRCImage
                 imgClassName="rounded-full border-4 border-gray-200"
                 data={aboutMe.profilePicture!.responsiveImage!}
+                imgStyle={{
+                  width: `${aboutMe.profilePicture!.responsiveImage!.width}px`,
+                  height: `${aboutMe.profilePicture!.responsiveImage!.height}px`,
+                }}
               />
             </div>
             <div className="text-center md:text-left">
