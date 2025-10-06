@@ -21,7 +21,7 @@
     "clsx": "^2.1.1",
     "gql.tada": "^1.8.13",
     "linq": "^4.0.3",
-    "lucide-react": "^0.544.0",
+    "lucide-react": "^0.545.0",
     "next": "15.5.4",
     "react": "19.2.0",
     "react-datocms": "^7.2.2",
