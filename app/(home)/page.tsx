@@ -67,15 +67,15 @@ export default async function AboutMe() {
           <div className="flex items-center justify-between">
             <div className="font-bold text-xl gradient-text">Christoph Bühler</div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="#about" className="text-muted-foreground hover:text-primary transition-colors">
                 About
-              </a>
-              <a href="#research" className="text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link href="#research" className="text-muted-foreground hover:text-primary transition-colors">
                 Research
-              </a>
-              <a href="#publications" className="text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link href="#publications" className="text-muted-foreground hover:text-primary transition-colors">
                 Publications
-              </a>
+              </Link>
             </div>
           </div>
         </div>

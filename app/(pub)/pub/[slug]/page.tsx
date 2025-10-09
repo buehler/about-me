@@ -1,8 +1,9 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CopyToClipboardButton } from '@/components/copy-to-clipboard';
+import { DatoMultiParagraphText } from '@/components/dato-multiparagraph-text';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { executeQuery } from '@/lib/datocms/executeQuery';
 import { graphql } from '@/lib/datocms/graphql';
-import { ArrowLeft } from 'lucide-react';
+import { Calendar, FileText, Link as LinkIcon, MapPin, Users } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -14,9 +15,13 @@ const query = graphql(`
       publicationDate
       authors
       abstract
+      tags
+      url
       file {
         url
       }
+      actionbuttons
+      citation
     }
   }
 `);
@@ -56,53 +61,120 @@ export default async function PublicationDetail({ params }: { params: Promise<{ 
   }
 
   const authors = publication.authors.split(',').map((a) => a.trim());
+  const tags = publication.tags?.split(',').map((t) => t.trim()) ?? [];
+  const actionButtons = publication.actionbuttons as { link: string; text: string }[];
 
   return (
-    <main className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-white shadow-sm">
-        <nav className="max-w-4xl mx-auto px-6 mb-4 mt-8">
-          <Link href="/" className="flex text-gray-700">
-            <ArrowLeft />
-            Back
-          </Link>
-        </nav>
-        <div className="max-w-4xl mx-auto px-6 pb-12 pt-8">
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            <div className="text-center md:text-left">
-              <div className="text-gray-500">{publication.publicationDate}</div>
-              <h1 className="text-2xl md:text-4xl text-left mb-4 font-bold text-gray-900">{publication.title}</h1>
-              {!!publication.venueTitle && <p className="text-left text-gray-500 mb-4">{publication.venueTitle}</p>}
+    <>
+      <header>
+        <div className="space-x-4 mb-6">
+          {tags.map((t, i) => (
+            <span
+              key={`tag-${i}`}
+              className="inline-block px-3 py-1 rounded-full text-sm font-medium mb-4"
+              style={{ backgroundColor: 'rgb(255 247 237)', color: 'rgb(194 65 12)' }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">{publication.title}</h1>
+        <div className="gap-6 text-muted-foreground mb-8">
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4" style={{ color: 'rgb(194 65 12)' }} />
+            <span>{publication.publicationDate}</span>
+          </div>
+          <div className="flex items-center">
+            <Users className="w-4 h-4 mr-2" style={{ color: 'rgb(194 65 12)' }} />
+            <div className="space-x-3">
+              {authors.map((a, i) => (
+                <span key={`author-${i}`}>{a}</span>
+              ))}
             </div>
           </div>
-          <div>{authors}</div>
+          {!!publication.venueTitle && (
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4" style={{ color: 'rgb(194 65 12)' }} />
+              {publication.venueTitle}
+            </div>
+          )}
         </div>
       </header>
-      <section className="py-4 grow flex">
-        <Tabs defaultValue="abstract" className="grow">
-          <TabsList className="mx-auto mb-6">
-            <TabsTrigger value="abstract">Abstract</TabsTrigger>
-            <TabsTrigger value="paper">Full Work</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="abstract" className="max-w-4xl mx-auto">
-            <p className="text-gray-900 text-justify px-4">{publication.abstract}</p>
-          </TabsContent>
-          <TabsContent value="paper" className="w-full px-4 md:w-6xl md:mx-auto">
-            <object data={publication.file.url} type="application/pdf" className="w-full h-full">
-              <div className="text-center mx-auto">
-                <p>Sorry, your browser does not support rendering a PDF file. But not to worry...</p>
-                <Link
-                  href={publication.file.url}
-                  target="_blank"
-                  className="bg-amber-300 px-12 py-8 inline-block rounded-2xl mt-8 text-2xl"
+      <main>
+        <div className="mb-12 flex flex-wrap gap-4">
+          <Link
+            href={publication.file.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 hover:scale-110 transition-opacity transition-transform"
+            style={{ backgroundColor: 'rgb(194 65 12)' }}
+          >
+            <FileText className="w-4 h-4" />
+            Full Paper
+          </Link>
+          {publication.url && (
+            <Link
+              href={publication.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-border px-6 py-3 rounded-lg font-medium hover:bg-muted/50 hover:scale-110 transition-colors transition-transform"
+            >
+              <LinkIcon className="w-4 h-4" />
+              Publication
+            </Link>
+          )}
+          {actionButtons?.map((btn, i) => (
+            <Link
+              key={`action-button-${i}`}
+              href={btn.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-border px-6 py-3 rounded-lg font-medium hover:bg-muted/50 hover:scale-110 transition-colors transition-transform"
+            >
+              {btn.text}
+            </Link>
+          ))}
+        </div>
+        <section>
+          <Card className="bg-card rounded-lg p-8 border border-border mb-12">
+            <CardHeader>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: 'rgb(255 247 237)' }}
                 >
-                  Download PDF
-                </Link>
+                  <FileText className="w-4 h-4" style={{ color: 'rgb(194 65 12)' }} />
+                </div>
+                Abstract
+              </h2>
+            </CardHeader>
+            <CardContent>
+              <DatoMultiParagraphText
+                className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-4 text-balance"
+                content={publication.abstract}
+              />
+            </CardContent>
+          </Card>
+        </section>
+        {!!publication.citation && (
+          <section>
+            <div className="bg-muted/30 rounded-lg p-8 border border-border">
+              <h2 className="text-xl font-bold mb-4">Citation</h2>
+              <div className="bg-card rounded-lg p-4 border border-border font-mono text-sm relative">
+                <div className="overflow-x-auto">
+                  <pre>{publication.citation}</pre>
+                </div>
+                <CopyToClipboardButton
+                  textToCopy={publication.citation}
+                  className="absolute right-0 top-0 p-2 border-l border-b rounded-bl-lg transition-colors"
+                  onCopiedTrueClassName="bg-green-500 text-white border-green-600"
+                  onCopiedFalseClassName="bg-neutral-50 text-black border-neutral-200"
+                />
               </div>
-            </object>
-          </TabsContent>
-        </Tabs>
-      </section>
-    </main>
+            </div>
+          </section>
+        )}
+      </main>
+    </>
   );
 }
