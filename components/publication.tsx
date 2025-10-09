@@ -16,7 +16,7 @@ type Props = {
 
 export const Publication = ({ data }: Props) => (
   <Link className="block" href={`/pub/${data.slug}`}>
-    <Card>
+    <Card className="publication-card">
       <CardContent>
         <div className="flex items-start justify-between">
           <div className="flex-1">

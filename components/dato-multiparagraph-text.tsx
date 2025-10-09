@@ -1,3 +1,16 @@
-export const DatoMultiParagraphText = ({ content, className }: { content: string; className?: string }) => {
-  return <div className={`mpt ${className}`} dangerouslySetInnerHTML={{ __html: content }}></div>;
+export const DatoMultiParagraphText = ({
+  content,
+  className,
+  highlightLinks,
+}: {
+  content: string;
+  className?: string;
+  highlightLinks?: boolean;
+}) => {
+  return (
+    <div
+      className={`mpt ${className} ${highlightLinks ? 'h-links' : ''}`}
+      dangerouslySetInnerHTML={{ __html: content }}
+    ></div>
+  );
 };
