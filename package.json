@@ -22,7 +22,7 @@
     "gql.tada": "^1.8.13",
     "linq": "^4.0.3",
     "lucide-react": "^0.577.0",
-    "next": "16.1.6",
+    "next": "16.1.7",
     "react": "19.2.4",
     "react-datocms": "^8.0.0",
     "react-dom": "19.2.4",
