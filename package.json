@@ -23,7 +23,7 @@
     "linq": "^4.0.3",
     "lucide-react": "^1.0.0",
     "next": "16.2.11",
-    "react": "19.2.7",
+    "react": "19.2.8",
     "react-datocms": "^8.0.0",
     "react-dom": "19.2.7",
     "serialize-error": "^13.0.0",
