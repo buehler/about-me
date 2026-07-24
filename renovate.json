@@ -13,14 +13,12 @@
 		},
 		{
 			"description": "Group Next.js core framework updates together",
-			"matchPackageNames": ["next"],
-			"matchPackagePrefixes": ["@next/"],
+			"matchPackageNames": ["next", "@next/{/,}**"],
 			"groupName": "Next.js core"
 		},
 		{
 			"description": "Group React core dependencies with Next.js to prevent peer mismatch",
-			"matchPackageNames": ["react", "react-dom"],
-			"matchPackagePrefixes": ["@types/react"],
+			"matchPackageNames": ["react", "react-dom", "@types/react{/,}**"],
 			"groupName": "React core"
 		},
 		{
