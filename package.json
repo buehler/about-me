@@ -27,7 +27,7 @@
 		"react-datocms": "8.1.2",
 		"react-dom": "19.3.0",
 		"serialize-error": "13.0.1",
-		"tailwind-merge": "3.6.0"
+		"tailwind-merge": "3.7.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "4.3.3",
