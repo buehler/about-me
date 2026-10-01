@@ -26,7 +26,7 @@
 		"react": "19.3.0",
 		"react-datocms": "8.1.2",
 		"react-dom": "19.3.0",
-		"serialize-error": "13.0.1",
+		"serialize-error": "13.0.2",
 		"tailwind-merge": "3.7.0"
 	},
 	"devDependencies": {
