@@ -23,9 +23,9 @@
 		"linq": "4.0.3",
 		"lucide-react": "1.56.0",
 		"next": "16.4.1",
-		"react": "19.3.0",
+		"react": "19.3.1",
 		"react-datocms": "8.1.2",
-		"react-dom": "19.3.0",
+		"react-dom": "19.3.1",
 		"serialize-error": "13.0.2",
 		"tailwind-merge": "3.7.0"
 	},
