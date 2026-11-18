@@ -1,0 +1,35 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo %}
+  <meta name="theme-color" content="#fbf8f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1621" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="{{ '/assets/img/icon.jpeg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/icon.jpeg' | relative_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/instrument-sans-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/instrument-serif-latin-400-italic.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <link rel="alternate" type="application/x-bibtex" title="All publications (BibTeX)" href="{{ '/publications.bib' | relative_url }}">
+  <script>
+    /* Runs before first paint: restore the chosen theme and, when motion is
+       welcome, hide animated elements until GSAP takes over (max. 3 s). */
+    (function () {
+      var root = document.documentElement;
+      try { var t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+      root.classList.add('js');
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        root.classList.add('anim-pending');
+        setTimeout(function () { root.classList.remove('anim-pending'); }, 3000);
+      }
+    })();
+  </script>
+  <script src="{{ '/assets/js/vendor/gsap.min.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/vendor/ScrollTrigger.min.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/vendor/Flip.min.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+  {%- if page.layout == 'publication' %}
+  {%- include scholar-meta.html %}
+  {%- else %}
+  {%- include person-jsonld.html %}
+  {%- endif %}
+</head>

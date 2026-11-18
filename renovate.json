@@ -2,24 +2,14 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"local>buehler/renovate-config",
-		"config:best-practices",
-		"config:js-app"
+		"config:best-practices"
 	],
 	"ignoreTests": true,
 	"packageRules": [
 		{
-			"matchPackageNames": ["typescript"],
-			"allowedVersions": "<6.0.0"
-		},
-		{
-			"description": "Group Next.js core framework updates together",
-			"matchPackageNames": ["next", "@next/{/,}**"],
-			"groupName": "Next.js core"
-		},
-		{
-			"description": "Group React core dependencies with Next.js to prevent peer mismatch",
-			"matchPackageNames": ["react", "react-dom", "@types/react{/,}**"],
-			"groupName": "React core"
+			"description": "Group Jekyll and its plugins",
+			"matchManagers": ["bundler"],
+			"groupName": "Jekyll"
 		},
 		{
 			"description": "Automerge minor and patch updates if CI passes",

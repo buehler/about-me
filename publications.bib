@@ -1,0 +1,9 @@
+---
+layout: null
+permalink: /publications.bib
+sitemap: false
+---
+{%- assign pubs = site.publications | sort: "date" | reverse -%}
+{%- for p in pubs %}
+{{ p.bibtex | strip }}
+{% endfor -%}

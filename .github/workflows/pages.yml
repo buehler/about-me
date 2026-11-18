@@ -1,0 +1,89 @@
+name: Build and deploy to GitHub Pages
+
+# Every push builds and link-checks the site; only pushes to `main` deploy it.
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    env:
+      JEKYLL_ENV: production
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ruby/setup-ruby@20eb24b0d509e2b9ed9b6d42ddfeb992915e0564 # v1.341.0
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      # Reads the Pages settings: base URL (github.io/<repo> or a custom domain).
+      - id: pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+        continue-on-error: true
+
+      # If Pages is not enabled yet, build for the default project-page URL
+      # (https://<owner>.github.io/<repo>) so branches can still be built and checked.
+      - id: site
+        name: Resolve site URL
+        run: |
+          origin="${{ steps.pages.outputs.origin }}"
+          base="${{ steps.pages.outputs.base_path }}"
+          if [ "${{ steps.pages.outcome }}" != "success" ]; then
+            echo "::warning::GitHub Pages is not enabled yet (Settings > Pages > Source: GitHub Actions). Building for the default github.io URL."
+            origin="https://${GITHUB_REPOSITORY_OWNER}.github.io"
+            base="/${GITHUB_REPOSITORY#*/}"
+          fi
+          echo "origin=${origin}" >> "$GITHUB_OUTPUT"
+          echo "base=${base}" >> "$GITHUB_OUTPUT"
+          echo "Building for ${origin}${base}/"
+
+      # url/baseurl come from the Pages settings, so changing the domain needs
+      # no change to the code.
+      - name: Build with Jekyll
+        run: |
+          echo "url: \"${{ steps.site.outputs.origin }}\"" > _config.ci.yml
+          bundle exec jekyll build \
+            --config _config.yml,_config.ci.yml \
+            --baseurl "${{ steps.site.outputs.base }}"
+
+      - name: Check internal links
+        run: |
+          base="${{ steps.site.outputs.base }}"
+          if [ -n "$base" ]; then
+            bundle exec htmlproofer _site --disable-external --swap-urls "^${base}:"
+          else
+            bundle exec htmlproofer _site --disable-external
+          fi
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

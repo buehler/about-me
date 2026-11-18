@@ -1,0 +1,21 @@
+{%- comment -%} One timeline entry from _data/journey.yml. Params: item, compact (optional). {%- endcomment -%}
+{%- assign j = include.item -%}
+{%- case j.kind -%}
+  {%- when "research" -%}{%- assign kicon = "flask" -%}{%- assign klabel = "Research" -%}
+  {%- when "education" -%}{%- assign kicon = "graduation-cap" -%}{%- assign klabel = "Education" -%}
+  {%- when "teaching" -%}{%- assign kicon = "presentation" -%}{%- assign klabel = "Teaching" -%}
+  {%- else -%}{%- assign kicon = "briefcase" -%}{%- assign klabel = "Industry" -%}
+{%- endcase -%}
+<li{% unless include.compact %} data-reveal{% endunless %}{% unless j.end %} class="is-current"{% endunless %}>
+  <span class="j-when"><time datetime="{{ j.start | date: '%Y-%m' }}">{{ j.start | date: "%b %Y" }}</time> – {% if j.end %}<time datetime="{{ j.end | date: '%Y-%m' }}">{{ j.end | date: "%b %Y" }}</time>{% else %}Present{% endif %}</span>
+  <div class="j-body">
+    {%- unless include.compact %}
+    <span class="j-kind j-kind-{{ j.kind }}">{% include icon.html name=kicon %}{{ klabel }}</span>
+    {%- endunless %}
+    <h3>{{ j.title }}</h3>
+    <p class="j-where">{% include org.html key=j.org %}{% if j.unit %} · {{ j.unit }}{% endif %}</p>
+    {%- if j.text %}
+    <p class="muted">{{ j.text }}{% if j.publication %}{% assign thesis = site.publications | where: "slug", j.publication | first %}{% if thesis %} <a class="j-link" href="{{ thesis.url | relative_url }}">Read the thesis {% include icon.html name="arrow-right" %}</a>{% endif %}{% endif %}</p>
+    {%- endif %}
+  </div>
+</li>

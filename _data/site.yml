@@ -1,0 +1,24 @@
+# Personal details used across the site. Links and contact addresses are in links.yml.
+name: Christoph Bühler
+first_name: Christoph
+last_name: Bühler
+degree: MSc in Computer Science
+role: PhD Student
+group: Programming Group
+university: University of St. Gallen
+university_short: HSG
+supervisor: Prof. Dr. Guido Salvaneschi
+location: St. Gallen, Switzerland
+focus: AI agent security
+intro: >-
+  I research AI agent security from a software engineering perspective,
+  focusing on building secure boundaries and mechanisms that protect agents
+  and their environments from attacks.
+
+# Shown as small chips below the about text. `icon` is a name from _includes/icon.html.
+hobbies:
+  - { name: Family time, icon: heart }
+  - { name: Video games, icon: gamepad }
+  - { name: Sailing, icon: sailboat }
+  - { name: Snowboarding, icon: mountain-snow }
+  - { name: Lindy Hop, icon: music }

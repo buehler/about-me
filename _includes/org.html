@@ -1,0 +1,3 @@
+{%- comment -%} Organisation name from links.yml, linked when a URL is set. Param: key. {%- endcomment -%}
+{%- assign o = site.data.links.organisations[include.key] -%}
+{%- if o.url and o.url != "" -%}<a href="{{ o.url }}" target="_blank" rel="noopener">{{ o.name }}</a>{%- else -%}{{ o.name }}{%- endif -%}

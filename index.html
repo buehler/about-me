@@ -1,0 +1,119 @@
+---
+layout: base
+home: true
+---
+{%- assign s = site.data.site -%}
+{%- assign links = site.data.links -%}
+{%- assign pubs = site.publications | sort: "date" | reverse -%}
+{%- assign n_conf = pubs | where: "filter", "conference" | size -%}
+{%- assign n_thesis = pubs | where: "filter", "thesis" | size -%}
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow" data-hero><span class="dot" aria-hidden="true"></span>{{ s.role }} · {{ s.group }}, {{ s.university_short }}</p>
+        <h1><span class="h1-line" data-hero>{{ s.first_name }}</span> <em class="h1-line" data-hero>{{ s.last_name }}</em></h1>
+        <p class="degree" data-hero>{{ s.degree }}</p>
+        <p class="lead" data-hero>{{ s.intro }}</p>
+        <div class="contact" data-hero>
+          <a class="btn btn-primary" href="mailto:{{ links.email }}">{% include icon.html name="mail" %}{{ links.email }}</a>
+          <span class="loc">{% include icon.html name="map-pin" %}{{ s.location }}</span>
+        </div>
+        <div data-hero>{% include socials.html %}</div>
+      </div>
+      <figure class="hero-photo" data-hero-photo>
+        <img src="{{ '/assets/img/profile.jpg' | relative_url }}" width="800" height="800" alt="Portrait of {{ s.name }}">
+        <figcaption class="badge-float" data-hero-badge>{% include icon.html name="shield" %}<span><small>Currently researching</small>{{ s.focus }}</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="wrap split">
+      <div class="split-head" data-reveal>
+        <p class="kicker">About</p>
+        <h2>Software engineering &amp; security <em>in the age of AI</em></h2>
+      </div>
+      <div class="prose" data-reveal>
+        {%- capture about %}{% include about.md %}{% endcapture %}
+        {{ about | markdownify }}
+        <ul class="hobbies" aria-label="Interests outside research">
+          {%- for h in s.hobbies %}
+          <li>{% include icon.html name=h.icon %}{{ h.name }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="section section-tint">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="kicker">Research</p>
+        <h2>What I <em>work on</em></h2>
+      </div>
+      <div class="interests">
+        {%- for it in site.data.interests %}
+        <article class="interest" data-reveal>
+          <div class="interest-icon">{% include icon.html name=it.icon %}</div>
+          <span class="interest-num" aria-hidden="true">0{{ forloop.index }}</span>
+          <h3>{{ it.title }}</h3>
+          <p>{{ it.description }}</p>
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="journey" class="section">
+    <div class="wrap split">
+      <div class="split-head" data-reveal>
+        <p class="kicker">Journey</p>
+        <h2>From industry <em>to research</em></h2>
+        <p class="muted">More than a decade of building software, then a move into academia.</p>
+      </div>
+      <div class="journey">
+        <div class="timeline-wrap" data-timeline>
+          <span class="timeline-progress" aria-hidden="true" data-timeline-progress></span>
+          <ol class="timeline">
+            {%- for j in site.data.journey %}{% unless j.earlier %}
+            {% include journey-item.html item=j %}
+            {%- endunless %}{% endfor %}
+          </ol>
+        </div>
+        {%- assign earlier = site.data.journey | where: "earlier", true %}
+        {%- if earlier.size > 0 %}
+        <details class="earlier" data-reveal>
+          <summary>{% include icon.html name="chevron-down" %}Earlier stations <span class="muted">{{ earlier.last.start | date: "%Y" }} – {{ earlier.first.end | date: "%Y" }}</span></summary>
+          <ol class="timeline timeline-compact">
+            {%- for j in earlier %}
+            {% include journey-item.html item=j compact=true %}
+            {%- endfor %}
+          </ol>
+        </details>
+        {%- endif %}
+      </div>
+    </div>
+  </section>
+
+  <section id="publications" class="section section-tint">
+    <div class="wrap">
+      <div class="section-head section-head-row" data-reveal>
+        <div>
+          <p class="kicker">Publications</p>
+          <h2>Papers <em>&amp; theses</em></h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter publications">
+          <button type="button" class="filter is-active" data-filter="all" aria-pressed="true">All <span>{{ pubs.size }}</span></button>
+          <button type="button" class="filter" data-filter="conference" aria-pressed="false">Conference <span>{{ n_conf }}</span></button>
+          <button type="button" class="filter" data-filter="thesis" aria-pressed="false">Theses <span>{{ n_thesis }}</span></button>
+        </div>
+      </div>
+      <div class="pubs" data-pubs>
+        {%- for p in pubs %}
+        {% include pub-card.html pub=p %}
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+</main>

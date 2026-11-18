@@ -1,0 +1,6 @@
+{%- comment -%} Profile links from _data/links.yml. Param: class (optional). {%- endcomment -%}
+<ul class="{{ include.class | default: 'socials' }}">
+  {%- for p in site.data.links.profiles %}
+  <li><a href="{{ p.url }}" target="_blank" rel="noopener me" aria-label="{{ p.name }}" data-tip="{{ p.name }}">{% include brand-icons/{{ p.icon }}.svg %}</a></li>
+  {%- endfor %}
+</ul>

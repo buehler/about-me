@@ -1,0 +1,43 @@
+---
+layout: base
+---
+{%- assign p = page -%}
+{%- assign others = site.publications | sort: "date" | reverse | where_exp: "q", "q.url != page.url" -%}
+<main id="main" class="pub-page">
+  <div class="wrap narrow">
+    <a class="back" href="{{ '/' | relative_url }}#publications">{% include icon.html name="arrow-left" %}All publications</a>
+    <header class="pub-header">
+      <div class="pub-tags" data-hero><span class="tag tag-accent">{{ p.kind }}</span><span class="tag">{{ p.short }}</span>{% for t in p.topics %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+      <h1 data-hero>{{ p.title }}</h1>
+      <dl class="meta" data-hero>
+        <div class="meta-row"><dt>{% include icon.html name="calendar" %}Published</dt><dd><time datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: "%-d %B %Y" }}</time></dd></div>
+        {%- if p.venue %}
+        <div class="meta-row"><dt>{% include icon.html name="landmark" %}Venue</dt><dd>{{ p.venue }}</dd></div>
+        {%- endif %}
+        <div class="meta-row"><dt>{% include icon.html name="users" %}Authors ({{ p.authors.size }})</dt><dd>{% include authors.html authors=p.authors %}</dd></div>
+      </dl>
+      <div class="pub-buttons" data-hero>{% include pub-links.html pub=p style="buttons" %}</div>
+    </header>
+    <section class="card abstract" aria-labelledby="abs" data-reveal>
+      <h2 id="abs"><span class="interest-icon sm">{% include icon.html name="file-text" %}</span>Abstract</h2>
+      <div class="prose">{{ content }}</div>
+    </section>
+    {%- if p.bibtex %}
+    <section class="card cite" aria-labelledby="cite" data-reveal>
+      <div class="cite-head">
+        <h2 id="cite"><span class="interest-icon sm">{% include icon.html name="quote" %}</span>Cite this work</h2>
+        <button class="btn btn-ghost btn-sm" type="button" data-copy="#bibtex">{% include icon.html name="copy" class="icon i-copy" %}{% include icon.html name="check" class="icon i-check" %}<span data-label>Copy BibTeX</span></button>
+      </div>
+      <pre id="bibtex" tabindex="0">{{ p.bibtex | strip | escape }}</pre>
+    </section>
+    {%- endif %}
+    <section class="more-pubs" aria-labelledby="more" data-reveal>
+      <h2 id="more">More publications</h2>
+      <div class="mini-pubs">
+        {%- for q in others limit: 3 %}
+        <a class="mini-pub" href="{{ q.url | relative_url }}"><span class="muted">{{ q.date | date: "%Y" }} · {{ q.short }}</span><span>{{ q.title }}</span></a>
+        {%- endfor %}
+      </div>
+    </section>
+  </div>
+</main>

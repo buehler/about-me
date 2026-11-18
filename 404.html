@@ -1,0 +1,17 @@
+---
+layout: base
+title: Page not found
+permalink: /404.html
+sitemap: false
+---
+<main id="main" class="not-found">
+  <div class="wrap narrow">
+    <p class="kicker">Error 404</p>
+    <h1>This page is <em>out of bounds.</em></h1>
+    <p class="lead">The page you are looking for does not exist or has moved. Maybe one of these helps:</p>
+    <div class="pub-buttons">
+      <a class="btn btn-primary" href="{{ '/' | relative_url }}">{% include icon.html name="arrow-left" %}Back to the homepage</a>
+      <a class="btn btn-ghost" href="{{ '/' | relative_url }}#publications">{% include icon.html name="file-text" %}Publications</a>
+    </div>
+  </div>
+</main>
