@@ -1,0 +1,58 @@
+# Site configuration.
+#
+# `url` and `baseurl` are injected by the GitHub Pages workflow from the
+# Pages settings, so the site works unchanged on https://buehler.github.io/about-me
+# today and on a custom domain later. The values below are only used for local
+# previews (`bundle exec jekyll serve`).
+url: "http://localhost:4000"
+baseurl: ""
+
+title: Christoph Bühler
+tagline: AI Agent Security Research
+author: Christoph Bühler
+description: >-
+  PhD student at the University of St. Gallen researching AI agent security
+  from a software engineering perspective.
+lang: en
+timezone: Europe/Zurich
+
+# The social-card image is set for all pages under `defaults` below. Profile
+# links for search engines are generated from _data/links.yml.
+
+collections:
+  publications:
+    output: true
+    permalink: /pub/:name/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og.jpg
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: publication
+      # The site owner is the page author; the paper's author list is `authors`.
+      author: Christoph Bühler
+      seo:
+        type: ScholarlyArticle
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - renovate.json
+  - vendor/
+  - .bundle/
+  - _publications/_template.md

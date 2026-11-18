@@ -1,0 +1,15 @@
+{%- assign s = site.data.site -%}
+{%- assign l = site.data.links %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": {{ s.name | jsonify }},
+    "jobTitle": {{ s.role | append: ", " | append: s.group | jsonify }},
+    "affiliation": { "@type": "CollegeOrUniversity", "name": {{ s.university | jsonify }}, "url": {{ l.organisations.hsg.url | jsonify }} },
+    "email": {{ "mailto:" | append: l.email | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }},
+    "image": {{ "/assets/img/profile.jpg" | absolute_url | jsonify }},
+    "sameAs": {{ l.profiles | map: "url" | jsonify }}
+  }
+  </script>

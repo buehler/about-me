@@ -1,0 +1,16 @@
+{%- assign p = include.pub -%}
+<article class="pub-card" data-kind="{{ p.filter }}" data-reveal>
+  <div class="pub-side">
+    <span class="pub-year">{{ p.date | date: "%Y" }}</span>
+    <span class="pub-short">{{ p.short }}</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-tags"><span class="tag tag-accent">{{ p.kind }}</span>{% for t in p.topics %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+    <h3 class="pub-title"><a href="{{ p.url | relative_url }}" class="stretched">{{ p.title }}</a></h3>
+    {%- if p.venue %}
+    <p class="pub-venue">{{ p.venue }}</p>
+    {%- endif %}
+    <p class="pub-authors">{% include authors.html authors=p.authors limit=6 %}</p>
+    <div class="pub-actions">{% include pub-links.html pub=p style="chips" %}<span class="pub-more" aria-hidden="true">Details {% include icon.html name="arrow-right" %}</span></div>
+  </div>
+</article>

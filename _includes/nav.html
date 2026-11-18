@@ -1,0 +1,31 @@
+{%- comment -%}
+On the home page the section links are plain anchors; on other pages they
+point back to the home page. All paths go through relative_url so they follow
+the configured base URL.
+{%- endcomment -%}
+{%- if page.home -%}{%- assign pre = "" -%}{%- else -%}{%- assign pre = "/" | relative_url -%}{%- endif -%}
+<header class="nav" data-nav>
+  <div class="nav-inner">
+    <a class="brand" href="{% if page.home %}#top{% else %}{{ '/' | relative_url }}{% endif %}" aria-label="{{ site.data.site.name }}, home">
+      <span class="mono" aria-hidden="true">CB</span><span class="brand-name">{{ site.data.site.name }}</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="{{ pre }}#about">About</a></li>
+        <li><a href="{{ pre }}#research">Research</a></li>
+        <li><a href="{{ pre }}#journey">Journey</a></li>
+        <li><a href="{{ pre }}#publications">Publications</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        {%- include icon.html name="moon" class="icon i-moon" -%}
+        {%- include icon.html name="sun" class="icon i-sun" -%}
+      </button>
+      <button class="icon-btn menu-btn" type="button" data-menu aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        {%- include icon.html name="menu" class="icon i-menu" -%}
+        {%- include icon.html name="x" class="icon i-x" -%}
+      </button>
+    </div>
+  </div>
+</header>

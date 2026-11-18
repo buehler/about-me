@@ -1,0 +1,28 @@
+# Research interests, shown as cards in the "Research" section (in this order).
+# `icon` is a name from _includes/icon.html.
+- title: AI Agent Security
+  icon: shield
+  description: >-
+    Security of AI agents and agentic systems from a software engineering
+    perspective. I focus on mechanisms that constrain agent capabilities,
+    establish secure execution boundaries, and limit the impact of compromised
+    or misbehaving agents. This includes protecting agents and their
+    environments against threats such as prompt injection and malicious tool
+    interactions.
+
+- title: Software & System Security
+  icon: lock
+  description: >-
+    Design and analysis of secure software systems, with a particular interest
+    in access control, isolation, sandboxing, and permission mechanisms. I am
+    interested in how established security principles can be adapted to systems
+    in which autonomous AI agents interact with software, data, and external
+    resources.
+
+- title: Software Engineering & Programming Languages
+  icon: code
+  description: >-
+    Software engineering techniques for building, analyzing, and securing
+    complex software systems. My interests include program analysis, testing,
+    verification, and mechanisms that make software behavior more observable
+    and controllable.

@@ -1,0 +1,82 @@
+# Career and education timeline, newest first.
+#
+#   start / end   YYYY-MM-DD (the day is ignored); leave `end` empty for "Present"
+#   org           key from links.yml → organisations (provides name + link)
+#   unit          optional sub-unit shown after the organisation
+#   kind          research | industry | education | teaching
+#   publication   optional file name (without .md) from _publications/ to link a thesis
+#   earlier       true = shown in the collapsible "Earlier" list
+
+- title: Doctoral Student, PhD in Computer Science
+  org: hsg
+  unit: Programming Group
+  kind: research
+  start: 2026-04-01
+  end:
+  text: Researching AI agent security under the supervision of Prof. Dr. Guido Salvaneschi.
+
+- title: Research Assistant
+  org: hsg
+  unit: Programming Group
+  kind: research
+  start: 2024-07-01
+  end: 2026-04-01
+  text: Research on Infrastructure as Code and AI agent security, including TerraDS and AgentBound.
+
+- title: MSc in Computer Science
+  org: hsg
+  kind: education
+  start: 2024-09-01
+  end: 2026-02-01
+  text: Thesis on early verification and testing for Infrastructure as Code.
+  publication: enhancing-early-verification-and-testing-for-infrastructure-as-code
+
+- title: Education Tutor, CAS Front-End Engineering Advanced
+  org: ost
+  kind: teaching
+  start: 2022-09-01
+  end: 2024-06-01
+  text: Co-created the certificate of advanced studies with OST on behalf of smartive and taught its lectures.
+
+- title: Software Engineer
+  org: smartive
+  kind: industry
+  start: 2015-06-01
+  end: 2024-06-01
+  text: Nine wonderful years of building software.
+
+- title: MSc in Computer Science
+  org: ost
+  kind: education
+  start: 2020-09-01
+  end: 2023-03-01
+  text: Thesis on identity security and authentication in heterogeneous systems.
+  publication: trust-in-a-distributed-authentication-mesh
+
+- title: Software Engineer
+  org: namics
+  kind: industry
+  start: 2013-08-01
+  end: 2015-06-01
+  earlier: true
+
+- title: BSc in Computer Science
+  org: hsr
+  kind: education
+  start: 2010-09-01
+  end: 2013-06-01
+  earlier: true
+
+- title: IT Specialist
+  org: gema
+  kind: industry
+  start: 2008-08-01
+  end: 2010-08-01
+  earlier: true
+
+- title: Apprenticeship as System Engineer
+  org: bischoff
+  kind: industry
+  start: 2003-08-01
+  end: 2007-06-01
+  earlier: true

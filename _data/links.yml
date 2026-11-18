@@ -1,0 +1,49 @@
+# Every external link and contact address on the site lives in this file.
+# Change a value here once and every page (header, footer, about text,
+# journey, search-engine metadata) picks it up on the next build.
+
+email: christoph.buehler@unisg.ch
+
+# Profile links, shown as icons in the hero and the footer (in this order).
+# `icon` refers to an SVG file in _includes/brand-icons/.
+profiles:
+  - name: GitHub
+    icon: github
+    url: https://github.com/buehler
+  - name: LinkedIn
+    icon: linkedin
+    url: https://www.linkedin.com/in/christoph-b%C3%BChler-a3a262270/
+  - name: Bluesky
+    icon: bluesky
+    url: https://bsky.app/profile/me.cbue.ch
+  - name: ORCID
+    icon: orcid
+    url: https://orcid.org/0000-0002-2224-1687
+  - name: Google Scholar
+    icon: scholar
+    url: https://scholar.google.com/citations?user=2FULmeEAAAAJ
+
+# Organisations referenced in the about text and the journey timeline.
+# Leave `url` empty to show the name without a link.
+organisations:
+  hsg:
+    name: University of St. Gallen
+    url: https://www.unisg.ch/
+  ost:
+    name: OST – Eastern Switzerland University of Applied Sciences
+    url: https://www.ost.ch/
+  hsr:
+    name: HSR Hochschule für Technik Rapperswil
+    url: ""
+  smartive:
+    name: smartive
+    url: https://smartive.ch
+  namics:
+    name: Namics – A Merkle Company
+    url: ""
+  gema:
+    name: Gema Switzerland
+    url: ""
+  bischoff:
+    name: Bischoff Textil AG
+    url: ""

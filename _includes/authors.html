@@ -1,0 +1,25 @@
+{%- comment -%}
+Renders an author list and highlights the site owner.
+Params: authors (array), limit (optional number). When the list is longer than
+`limit`, the first authors are shown, the owner is always kept visible, and
+the rest is summarised as "+N more".
+{%- endcomment -%}
+{%- assign me = site.data.site.name -%}
+{%- assign list = include.authors -%}
+{%- assign limit = include.limit | default: 0 -%}
+{%- assign tail = false -%}
+{%- assign shown = list -%}
+{%- if limit > 0 and list.size > limit -%}
+  {%- assign shown = list | slice: 0, limit -%}
+  {%- if list contains me -%}
+    {%- assign head_n = limit | minus: 1 -%}
+    {%- assign head = list | slice: 0, head_n -%}
+    {%- unless head contains me -%}{%- assign shown = head -%}{%- assign tail = true -%}{%- endunless -%}
+  {%- endif -%}
+{%- endif -%}
+{%- for a in shown -%}
+  {%- if a == me -%}<span class="self">{{ a }}</span>{%- else -%}{{ a }}{%- endif -%}
+  {%- unless forloop.last -%}, {% endunless -%}
+{%- endfor -%}
+{%- if tail -%}, <span class="ellip">…</span>, <span class="self">{{ me }}</span>{%- endif -%}
+{%- if limit > 0 and list.size > limit -%}{%- assign rest = list.size | minus: limit %} <span class="more">+{{ rest }} more</span>{%- endif -%}

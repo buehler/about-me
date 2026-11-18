@@ -1,0 +1,15 @@
+{%- assign s = site.data.site -%}
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-name">{{ s.name }}</p>
+      <p class="muted">{{ s.role }} · {{ s.group }} · {{ s.university }}</p>
+      <p class="footer-mail"><a href="mailto:{{ site.data.links.email }}">{% include icon.html name="mail" %}{{ site.data.links.email }}</a></p>
+    </div>
+    {% include socials.html class="socials socials-sm" %}
+  </div>
+  <div class="wrap footer-meta muted">
+    <span>© {{ site.time | date: "%Y" }} {{ s.name }}</span>
+    <a href="{{ '/publications.bib' | relative_url }}" download>{% include icon.html name="download" %}All publications (BibTeX)</a>
+  </div>
+</footer>
