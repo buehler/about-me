@@ -6,7 +6,7 @@ A static site built with [Jekyll](https://jekyllrb.com/) and deployed to GitHub 
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml). There is no CMS and no
 server: the pages are plain HTML templates that are filled from a few data files.
 
-- Live (GitHub Pages): https://buehler.github.io/about-me/
+- Live: https://me.cbue.ch/
 
 ## How to edit content
 
@@ -40,16 +40,13 @@ Google Scholar meta tags are all generated from that one file.
 
 ## URLs and domains
 
-Internal links never contain a hard-coded domain: templates use Jekyll's `relative_url`
-(and `absolute_url` for canonical/social URLs). In CI, `url` and `baseurl` are taken from
-the repository's GitHub Pages settings (`actions/configure-pages`), so the same code works on:
+The site is served at the root of the custom domain `https://me.cbue.ch/`. The domain is
+set once in `_config.yml` (`url`, with an empty `baseurl`) and in `CNAME`. Internal links
+never contain a hard-coded domain: templates use Jekyll's `relative_url` (and
+`absolute_url` for canonical/social URLs).
 
-- `https://buehler.github.io/about-me/` (current), and
-- a custom domain such as `https://me.cbue.ch/`.
-
-**Switching to a custom domain:** set the domain under *Settings → Pages → Custom domain*
-(GitHub adds the `CNAME`), point the DNS record to GitHub Pages, and push. No template
-changes are needed.
+**Changing the domain:** update `url` in `_config.yml`, `CNAME`, and the custom domain
+under *Settings → Pages*, then push.
 
 ## Local preview
 
@@ -58,12 +55,6 @@ Requires Ruby ≥ 3.1 and Bundler.
 ```sh
 bundle install
 bundle exec jekyll serve --livereload      # http://localhost:4000
-```
-
-To test it under the same sub-path as GitHub Pages:
-
-```sh
-bundle exec jekyll serve --baseurl /about-me   # http://localhost:4000/about-me/
 ```
 
 Without Ruby installed you can use Docker:

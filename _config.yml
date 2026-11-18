@@ -1,10 +1,10 @@
 # Site configuration.
 #
-# `url` and `baseurl` are injected by the GitHub Pages workflow from the
-# Pages settings, so the site works unchanged on https://buehler.github.io/about-me
-# today and on a custom domain later. The values below are only used for local
-# previews (`bundle exec jekyll serve`).
-url: "http://localhost:4000"
+# The site is served at the root of the custom domain https://me.cbue.ch.
+# Templates build every link with `relative_url` / `absolute_url`, so these two
+# values are the only place the domain is configured. `jekyll serve` overrides
+# `url` with http://localhost:4000 for local previews.
+url: "https://me.cbue.ch"
 baseurl: ""
 
 title: Christoph Bühler

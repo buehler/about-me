@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: read
     env:
       JEKYLL_ENV: production
     steps:
@@ -29,44 +28,12 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
-      # Reads the Pages settings: base URL (github.io/<repo> or a custom domain).
-      - id: pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-        continue-on-error: true
-
-      # If Pages is not enabled yet, build for the default project-page URL
-      # (https://<owner>.github.io/<repo>) so branches can still be built and checked.
-      - id: site
-        name: Resolve site URL
-        run: |
-          origin="${{ steps.pages.outputs.origin }}"
-          base="${{ steps.pages.outputs.base_path }}"
-          if [ "${{ steps.pages.outcome }}" != "success" ]; then
-            echo "::warning::GitHub Pages is not enabled yet (Settings > Pages > Source: GitHub Actions). Building for the default github.io URL."
-            origin="https://${GITHUB_REPOSITORY_OWNER}.github.io"
-            base="/${GITHUB_REPOSITORY#*/}"
-          fi
-          echo "origin=${origin}" >> "$GITHUB_OUTPUT"
-          echo "base=${base}" >> "$GITHUB_OUTPUT"
-          echo "Building for ${origin}${base}/"
-
-      # url/baseurl come from the Pages settings, so changing the domain needs
-      # no change to the code.
+      # url/baseurl come from _config.yml (https://me.cbue.ch, served at the root).
       - name: Build with Jekyll
-        run: |
-          echo "url: \"${{ steps.site.outputs.origin }}\"" > _config.ci.yml
-          bundle exec jekyll build \
-            --config _config.yml,_config.ci.yml \
-            --baseurl "${{ steps.site.outputs.base }}"
+        run: bundle exec jekyll build
 
       - name: Check internal links
-        run: |
-          base="${{ steps.site.outputs.base }}"
-          if [ -n "$base" ]; then
-            bundle exec htmlproofer _site --disable-external --swap-urls "^${base}:"
-          else
-            bundle exec htmlproofer _site --disable-external
-          fi
+        run: bundle exec htmlproofer _site --disable-external
 
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         if: github.ref == 'refs/heads/main'
