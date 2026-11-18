@@ -25,7 +25,7 @@ jobs:
 
       - uses: ruby/setup-ruby@20eb24b0d509e2b9ed9b6d42ddfeb992915e0564 # v1.341.0
         with:
-          ruby-version: '3.3'
+          ruby-version: '4.0'
           bundler-cache: true
 
       # url/baseurl come from _config.yml (https://me.cbue.ch, served at the root).
